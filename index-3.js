@@ -2,15 +2,14 @@ const baseURL = 'http://pokeapi.co/api/v2/';
 
 const pokemonURL = num => `${baseURL}pokemon/${num}/`;
 
-const numberOfPokemon = 50;
-
-const numbers = [...Array(numberOfPokemon).keys()].map(n => n + 1);
-
-numbers.map(number => {
-  fetch(pokemonURL(number)).then(response => {
-    response.json().then(json => drawPokemon(json));
-  });
-});
+const getPokemon = number =>
+  fetch(pokemonURL(number))
+    .then(response =>
+      response.json()
+    )
+    .then(json =>
+      drawPokemon(json)
+    )
 
 const drawPokemon = pokemonData => {
   const{
@@ -30,3 +29,6 @@ const drawPokemon = pokemonData => {
     </span>
   `;
 };
+
+
+getPokemon(151);
